@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=yes" />
+  <meta property="og:locale" content="en_US" />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Color Luminosity Scale" />
+  <meta property="og:description" content="Calculator and visualization for luminosity of sRGB colors" />
+  <meta property="og:url" content="http://www.ajfarkas.com/luminosity" />
+  <meta property="og:site_name" content="AJ Farkas Web Dev" />
+  <meta property="og:image" content="images/oglogo.png" />
+  <link rel="shortcut icon" href="../favicon.ico" type="image/x-icon">
+  <link rel="icon" href="../favicon.ico" type="image/x-icon">
+  <title>Color Scale</title>
+  <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,600|Merriweather' rel='stylesheet' type='text/css' />
+  <link href="color.css" rel="stylesheet" type="text/css" />
+<body>
+  <!--[if lt IE 9]>
+     
+  <![endif]-->
+  <nav class="clearfix">
+    <a href="/" title="home"><h1>AJ Farkas</h1><h2>::front-end dev</h2></a>
+    <div class="logos">
+      <a class="logo logo-blog" href="blog" title="blog"></a>
+      <a class="logo logo-contact" href="mailto:farkas.aj@gmail.com" title="email me"></a>
+    </div>
+  </nav>
+  <form id="color-input">
+    <fieldset>
+      <label>Enter your color:</label>
+      <input type="color" name="color-picker" id="color-picker" placeholder="#2f2f2f"></input>
+      <input type="text" name="color-text" id="color-text" placeholder="#2f2f2f"></input>
+    </fieldset>
+  </form>
+  <section class="results">
+    <h3>Results</h3>
+    <svg id="svg-results" width="100%" height="100%" viewBox="0 0 100.4 20.4">
+      <defs>
+        <linearGradient id="monoGrad">
+          <stop offset="0%" stop-color="#000" />
+          <stop offset="13%" stop-color="#040404" />
+          <stop offset="57%" stop-color="#404040" />
+          <stop offset="76%" stop-color="#808080" />
+          <stop offset="100%" stop-color="#fff" />
+        </linearGradient>
+      </defs>
+      <rect x=".2" y=".2" width="100" height="5" fill="url(#monoGrad)" stroke="#2f2f2f" stroke-width=".2"/>
+    </svg>
+  </section>
+</body>
+<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.5/d3.min.js"></script> -->
+<script src="js/color.js"></script>
+</html>

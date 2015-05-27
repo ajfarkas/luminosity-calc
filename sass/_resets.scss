@@ -1,0 +1,39 @@
+* {
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+footer, .push { height: $footer-height; }
+
+html { font-size: 62.5%; }
+
+body{ 
+  font-family: $font-primary;
+  font-size: rem(13);
+  //adjust iPhone font-sizes
+  @media screen and (max-device-width: 480px) and (orientation: landscape) {
+    -webkit-text-size-adjust: 80%;
+  }
+}
+
+.clearfix:after {
+  content: " ";
+  display: table;
+  clear: both;  
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+  font: {
+    family: inherit;
+    size: inherit;
+    weight: inherit;
+    style: inherit;
+  }
+}
+
+.noDisplay {
+  display: none;
+}

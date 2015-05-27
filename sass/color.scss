@@ -1,0 +1,140 @@
+@import "vars";
+@import "mixins";
+@import "resets";
+
+/*fonts*/
+  h1, h2 {
+    display: inline-block;
+    font-family: $font-headline;
+    font-weight: 400
+  }
+  h1 {
+    font-size: rem(22);
+    line-height: 2.0;
+    @include breakpoint(720 959) {
+      font-size: rem(28);
+      line-height: 1.6;
+    }
+    @include breakpoint(960) {
+      font-size: rem(35);
+      line-height: 1.3;
+    }
+  }
+  h2 {
+    color: $color2;
+    font-size: rem(19);
+    @include breakpoint(720 959) { font-size: rem(22); }
+    @include breakpoint(960) { font-size: rem(29); }
+  }
+
+/*icons*/
+  .logo {
+    display: inline-block;
+    width: $logo-sm;
+    height: $logo-sm;
+    vertical-align: middle;
+    background: {
+      image: url('images/logos.png');
+      size: $logo-sm*4 $logo-sm*2;
+    }
+    @include breakpoint(720 959) {
+      width: $logo-med;
+      height: $logo-med;
+      background-size: $logo-med*4 $logo-med*2;
+    }
+    @include breakpoint(960) {
+      width: $logo-lg;
+      height: $logo-lg;
+      background-size: $logo-lg*4 $logo-lg*2;
+    }
+  }
+
+  a.logo {
+    margin-left: $logo-sm/6;
+    @include breakpoint(720 959) { margin-left: $logo-med/5; }
+    @include breakpoint(960) { margin-left: $logo-lg/3; }
+  }
+
+  .logo-blog {
+    background-position: (-2 * $logo-sm) 0;
+    @include breakpoint(720 959) { background-position: (-2 * $logo-med) 0; }
+    @include breakpoint(960) { background-position: (-2 * $logo-lg) 0; }
+  }
+  .logo-blog:hover, a:hover .logo-blog {
+    background-position: (-2 * $logo-sm) (-$logo-sm);
+    @include breakpoint(720 959) { background-position: (-2 * $logo-med) (-$logo-med); }
+    @include breakpoint(960) {  background-position: (-2 * $logo-lg) (-$logo-lg); }
+  }
+
+  .logo-contact {
+    background-position: (-3 * $logo-sm) 0;
+    @include breakpoint(720 959) { background-position: (-3 * $logo-med) 0; }
+    @include breakpoint(960) { background-position: (-3 * $logo-lg) 0; }
+  }
+  .logo-contact:hover, a:hover .logo-contact {
+    background-position: (-3 * $logo-sm) (-$logo-sm);
+    @include breakpoint(720 959) { background-position: (-3 * $logo-med) (-$logo-med); }
+    @include breakpoint(960) {  background-position: (-3 * $logo-lg) (-$logo-lg); }
+  }
+
+/*nav*/
+  nav {
+    box-sizing: border-box;
+    width: 100%;
+    padding: rem(8) rem(32);
+    background-color: $bg-nav;
+    border-bottom: 1px solid lightgray;
+    @include breakpoint(399, max) {
+      padding: rem(8);
+    }
+  }
+
+  .logos {
+    float: right;
+    padding-top: rem(6);
+    height: rem(38);
+  }
+
+/*body*/
+  fieldset { display: inline-block; }
+
+  #color-picker {
+    border: 0;
+    width: 30px;
+    height: 20px;
+  }
+
+  #color-text {
+    border: 0;
+    width: 150px;
+    height: 20px;
+    box-shadow: inset 0 -1px black;
+  }
+
+  .input-alert {
+    display: inline-block;
+    padding: 0 4px;
+    color: white;
+    background-color: crimson;
+  }
+
+  .results {
+    width: 80vw;
+    height: 16vw;
+    margin-left: 10vw;
+  }
+
+  text {
+    font-size: rem(1.3);
+    color: black;
+  }
+
+
+
+
+
+
+
+
+
+
