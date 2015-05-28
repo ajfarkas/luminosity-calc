@@ -84,9 +84,7 @@
     padding: rem(8) rem(32);
     background-color: $bg-nav;
     border-bottom: 1px solid lightgray;
-    @include breakpoint(399, max) {
-      padding: rem(8);
-    }
+    @include breakpoint(399, max) { padding: rem(8); }
   }
 
   .logos {
@@ -96,19 +94,48 @@
   }
 
 /*body*/
-  fieldset { display: inline-block; }
+  section { 
+    position: relative;
+    width: 80vw;
+    margin-left: 10vw;
+    margin-top: 10px;
+  }
+  section:not(:first-of-type) { border-top: 1px solid gray; }  
 
-  #color-picker {
+  button {
+    position: absolute;
+    top: 3px;
+    right: 0;
+    padding: 5px 8px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+    box-shadow: 0 -1px #666 inset;
+    background-color: white;
+    text-transform: uppercase;
+  }
+  button:active { box-shadow: 0 1px #666 inset; }
+  button:focus { 
+    outline: none;
+    color: $color2; 
+  }
+
+  form { margin: 25px 20px; }
+
+  .primary { margin-bottom: 15px; }
+
+  .label { font-weight: 600; }
+
+  input[type=color] {
     border: 0;
-    width: 30px;
+    width: 25px;
     height: 20px;
   }
 
-  #color-text {
+  input[type=text] {
     border: 0;
     width: 150px;
     height: 20px;
-    box-shadow: inset 0 -1px black;
+    box-shadow: 0px -2px #fff inset, 0 -3px #000 inset;
   }
 
   .input-alert {
@@ -117,19 +144,31 @@
     color: white;
     background-color: crimson;
   }
-
+  
   .results {
-    width: 80vw;
-    height: 16vw;
-    margin-left: 10vw;
+    height: 32vw;
+    @include breakpoint(1024) { height: 16vw; }
+  }
+
+  #svg-results {
+    @include breakpoint(1024) { margin-top: 15px; }
   }
 
   text {
-    font-size: rem(1.3);
+    font-size: rem(2.6);
     color: black;
+    @include breakpoint(1024) { font-size: rem(1.3); }
   }
 
-
+  .list * { display: inline-block; }
+  .list li { margin: 10px; }
+  .swatch {
+    width: 20px;
+    height: 20px;
+  }
+  .color-list {
+    margin-left: 5px;
+  }
 
 
 

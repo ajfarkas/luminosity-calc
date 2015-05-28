@@ -26,29 +26,55 @@
       <a class="logo logo-contact" href="mailto:farkas.aj@gmail.com" title="email me"></a>
     </div>
   </nav>
-  <form id="color-input">
-    <fieldset>
-      <label>Enter your color:</label>
-      <input type="color" name="color-picker" id="color-picker" placeholder="#2f2f2f"></input>
-      <input type="text" name="color-text" id="color-text" placeholder="#2f2f2f"></input>
-    </fieldset>
-  </form>
+
+  <section class="input">
+    <h3>Visual Luminosity Calculator</h3>
+    <p>Choose several colors to see their relative visual brightness</p>
+    <form id="color-input">
+      <fieldset class="primary">
+        <label>
+          <p class="label">Enter your color:</p>
+          <input type="text" name="color-text" id="color-text" placeholder="#2f2f2f"></input>
+          <input type="color" name="color-picker" id="color-picker" value="#2f2f2f"></input>
+        </label>
+      </fieldset>
+      <fieldset class="background">
+        <label>
+          <p class="label">Choose a background color:</p>
+          <input type='text' name="bg-text" id="bg-text" placeholder="rgb(255,255,255)"></input>
+          <input type="color" name="bg-picker" id="bg-picker" value="#ffffff"></input>
+        </label>
+      </fieldset>
+    </form>
+  </section>
+
   <section class="results">
-    <h3>Results</h3>
-    <svg id="svg-results" width="100%" height="100%" viewBox="0 0 100.4 20.4">
+    <h3>Results:</h3>
+    <p>on the luminosity scale, 0-100</p>
+    <button type="button" id="clear-svg">clear</button>
+    <svg id="svg-results" width="100%" height="80%" viewBox="0 0 100.4 16.4">
       <defs>
         <linearGradient id="monoGrad">
           <stop offset="0%" stop-color="#000" />
           <stop offset="13%" stop-color="#040404" />
-          <stop offset="57%" stop-color="#404040" />
+          <stop offset="50%" stop-color="#2f2f2f" />
           <stop offset="76%" stop-color="#808080" />
           <stop offset="100%" stop-color="#fff" />
         </linearGradient>
       </defs>
-      <rect x=".2" y=".2" width="100" height="5" fill="url(#monoGrad)" stroke="#2f2f2f" stroke-width=".2"/>
+      <text x="0" y="1" text-anchor="start">0 Luminosity</text>
+      <text x="100" y="1" text-anchor="end">100 Luminosity</text>
+      <rect x=".1" y="1.6" width="100" height="2.5" id="gradient" fill="url(#monoGrad)" stroke="#2f2f2f" stroke-width=".1"/>
+      <rect x=".1" y="4.1" width="100" height="3.5" id="results-bg" fill="white" stroke="#2f2f2f" stroke-width=".1"/>
     </svg>
   </section>
+
+  <section class="log clearfix">
+    <h3>Color Log:</h3>
+    <p>hex color and luminosity in L*ab color space</p>
+    <button type="button" id="clear-list">clear</button>
+    <ul class="list"></ul>
+  </section>
 </body>
-<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.5/d3.min.js"></script> -->
 <script src="js/color.js"></script>
 </html>

@@ -2,87 +2,145 @@ var $ = function(node) { return document.querySelector(node) },
     $$ = function(node) { return document.querySelectorAll(node) },
     cPicker = $('#color-picker'),
     cText = $('#color-text'),
-    svg = $('#svg-results')
+    bgPicker = $('#bg-picker'),
+    bgText = $('#bg-text'),
+    clearSVGbtn = $('#clear-svg'),
+    clearListBtn = $('#clear-list'),
+    svg = $('#svg-results'),
+    list = $('.list')
 
 //prevent page reload
 cText.addEventListener('keypress', function(e) { 
-  if (e.keyCode == 13) {
+  if (e.keyCode == 13 || e.keyCode == 9) {
     e.preventDefault()
-    getLuminosity.call(this)
+    changeColor.call(this)
   }
 })
 //link picker and textbox, set action
-cText.addEventListener('change', getLuminosity)
-cPicker.addEventListener('change', getLuminosity)
+cText.addEventListener('change', changeColor)
+cPicker.addEventListener('change', changeColor)
+bgText.addEventListener('change', changeColor)
+bgPicker.addEventListener('change', changeColor)
 
-function getLuminosity() {
-  if (this == cPicker) 
-    var that = cText
-  else if (this == cText)
-    var that = cPicker
-  //set other input to be equal
-  that.value = this.value
+clearSVGbtn.addEventListener('click', clear.bind(this, '.result'))
+clearListBtn.addEventListener('click', clear.bind(this, '.list li'))
 
-  //find luminosity
-  var L
-  //convert to [r,g,b] format
-  //for hex colors
-  if (this.value.match(/#?[0-9a-fA-F]{6}/) ) {
-    //remove any outstanding alerts
-    if ($('.input-alert') ) $('.input-alert').remove()
-    var color = calc.hex2rgb(this.value)
-    L = calc.rgb2Lab(color)[0]
-  }
-  //for rgb colors
-  else if(this.value.match(/rgba?\(\d{1,3}\,\s?\d{1,3}\,\s?\d{1,3}/) ) {
-    //remove any outstanding alerts
-    if ($('.input-alert') ) $('.input-alert').remove()
-    var color = this.value.match(/rgba?\((\d{1,3})\,\s?(\d{1,3})\,\s?(\d{1,3})/),
-        rgb = [color[1], color[2], color[3]]
-    L = calc.rgb2Lab(rgb)[0]
-  }
-  //for color names
-  else {
-    if (!$('.input-alert') ) {
-      var p = document.createElement('p')
-      p.className = 'input-alert'
-      p.innerHTML = this.value.match(/[^#]\b\w+\b/)
-        ? 'color names not yet supported.'
-        : 'this is not a valid color format.'
-      $('#color-input').appendChild(p) 
+function changeColor() {
+  var self = this,
+      that
+  if (self == cPicker) that = cText
+  else if (self == cText) that = cPicker
+  else if (self == bgPicker) that = bgText
+  else if (self == bgText) that = bgPicker
+  
+  function setInputDisplay(node, value) {
+    //set other input to be equal
+    if (node.id.match('picker') ) {
+      that.setAttribute('placeholder', value)
+      that.value = ''
     }
-    return
+    else if (node.id.match('text') )
+      that.value = value
   }
 
-  //create nodes
-  var nsURI = 'http://www.w3.org/2000/svg'
-  var g = document.createElementNS(nsURI, 'g')
-  var rect = document.createElementNS(nsURI, 'rect')
-  var text = document.createElementNS(nsURI, 'text')
+  function getLuminosity(node) {
+    if ($('.input-alert') ) $('.input-alert').remove()
+    //convert to [r,g,b] format
+    //for hex colors
+    if (node.value.match(/#[0-9a-fA-F]{6}/) ) {      
+      var rgb = calc.hex2rgb(node.value)
+    }
+    //for rgb colors
+    else if(node.value.match(/rgba?\(\d{1,3}\,\s?\d{1,3}\,\s?\d{1,3}/) ) {
+      var color = node.value.match(/rgba?\((\d{1,3})\,\s?(\d{1,3})\,\s?(\d{1,3})/),
+          rgb = [+color[1], +color[2], +color[3]]
+      node.value = calc.rgb2hex(rgb)
+    }
+    if (rgb) {
+      setInputDisplay(node, calc.rgb2hex(rgb))
+      return calc.rgb2Lab(rgb)[0]
+    }
+    else return null
+  } 
 
-  //add attributes, etc.
-  g.setAttribute('class', 'result '+ this.value.replace(/\s|[,.-]/g, ''))
+  if (self == bgPicker || self == bgText) {
+    if (getLuminosity(self) == undefined ) return throwAlert()
+    $('#results-bg').setAttribute('fill', self.value)
+  }
+  //find luminosity & place color swatches
+  else if (self == cPicker || self == cText) {
+    var L = getLuminosity(self)
 
-  rect.setAttribute('x', L)
-  rect.setAttribute('y', '.2')
-  rect.setAttribute('width', '.6')
-  rect.setAttribute('height', '5')
-  rect.setAttribute('fill', this.value)
+    if (L == undefined) return throwAlert()
 
-  text.setAttribute('y', L)
-  text.setAttribute('x', '-6')
-  text.setAttribute('dy', '.7')
-  text.setAttribute('transform', 'rotate(-90)')
-  text.setAttribute('text-anchor', 'end')
-  text.innerHTML = this.value
+    createVisSwatch(self.value, L)
+    createLog(self.value, L)
+  }
 
-  //add to SVG
-  g.appendChild(rect)
-  g.appendChild(text)
-  svg.appendChild(g)
+  function createVisSwatch(color, L) {
+    //create nodes
+    var nsURI = 'http://www.w3.org/2000/svg'
+    var g = document.createElementNS(nsURI, 'g')
+    var rect = document.createElementNS(nsURI, 'rect')
+    var text = document.createElementNS(nsURI, 'text')
 
-  svg.setAttribute('class', 'noDisplay')
-  svg.setAttribute('class', '')
+    //add attributes, etc.
+    g.setAttribute('class', 'result '+ color.replace(/\s|[,.-]/g, ''))
+    //create swatches
+    rect.setAttribute('x', L)
+    rect.setAttribute('y', '2.6')
+    rect.setAttribute('width', '.6')
+    rect.setAttribute('height', '5')
+    rect.setAttribute('fill', color)
+    //add text labels to swatches
+    text.setAttribute('y', L)
+    text.setAttribute('x', '-8.4')
+    text.setAttribute('dy', '.7')
+    text.setAttribute('transform', 'rotate(-90)')
+    text.setAttribute('text-anchor', 'end')
+    text.innerHTML = color
+
+    //add to SVG
+    g.appendChild(rect)
+    g.appendChild(text)
+    svg.appendChild(g)
+  }
+  
+  function createLog(color, L) {
+    //create nodes
+    var swatch = document.createElement('div')
+    var p = document.createElement('p')
+    var item = document.createElement('li')
+    //create color swatches
+    swatch.setAttribute('class', 'swatch')
+    swatch.setAttribute('style', 'background-color:'+color)
+    //create color label
+    p.setAttribute('class', 'color-list')
+    p.innerHTML = color+' : '+Math.floor(L)+'L*'
+    //add li with swatch and label
+    item.appendChild(swatch)
+    item.appendChild(p)
+    list.appendChild(item)
+  }
+
+  //for invalid inputs
+  function throwAlert() {
+    var p = document.createElement('p')
+    p.className = 'input-alert'
+    p.innerHTML = self.value.match(/[^#]\b\w+[^\d]\b/)
+      ? 'color names not yet supported.'
+      : 'this is not a valid color format.'
+    self.parentNode.appendChild(p) 
+  }
+
+}
+
+function clear(els) {
+  var results = $$(els),
+      resLen = results.length
+  for (var i = 0; i < resLen; i++) {
+    results[i].remove()
+  }
 }
 
 var calc = {
