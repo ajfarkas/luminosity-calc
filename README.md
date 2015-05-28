@@ -22,12 +22,12 @@ You can clear the plot and list independent of one another with the `clear` butt
 ####How do I Read the Visualization?
 Well, it depends on what your goal is. If you're choosing colors for a heatmap, for instance, you may want to find a range of colors that are evenly spaced across the scale. If you were to use the full color specturm, you'd get the following luminosity values:
 
-#89000A : 40L* (red)
-#F09800 : 83L* (orange)
-#FCFF00 : 97L* (yellow)
-#6ED521 : 86L* (green)
-#3D63FF : 69L* (blue)
-#9400F2 : 50L* (purple)
+`#89000A` : 40L* (red)<br/>
+`#F09800` : 83L* (orange)<br/>
+`#FCFF00` : 97L* (yellow)<br/>
+`#6ED521` : 86L* (green)<br/>
+`#3D63FF` : 69L* (blue)<br/>
+`#9400F2` : 50L* (purple)
 
 Note that how close the two colors at opposite ends of the spectrum are (red: 40, purple: 50). The scale gets brighter and then darker again. A better scale may be simplified to blue, green, yellow (69, 86, 97). Or you could choose to darken your blue and green points, to broaden the visual contrast of the scale.
 
