@@ -21,13 +21,14 @@ cText.addEventListener('change', changeColor)
 cPicker.addEventListener('change', changeColor)
 bgText.addEventListener('change', changeColor)
 bgPicker.addEventListener('change', changeColor)
-
+//link clear buttons
 clearSVGbtn.addEventListener('click', clear.bind(this, '.result'))
 clearListBtn.addEventListener('click', clear.bind(this, '.list li'))
 
 function changeColor() {
   var self = this,
       that
+  //find paired input
   if (self == cPicker) that = cText
   else if (self == cText) that = cPicker
   else if (self == bgPicker) that = bgText
@@ -56,8 +57,11 @@ function changeColor() {
           rgb = [+color[1], +color[2], +color[3]]
       node.value = calc.rgb2hex(rgb)
     }
+    //if user input is valid
     if (rgb) {
+      //match color picker and text
       setInputDisplay(node, calc.rgb2hex(rgb))
+      //return calculated luminosity
       return calc.rgb2Lab(rgb)[0]
     }
     else return null
@@ -70,9 +74,9 @@ function changeColor() {
   //find luminosity & place color swatches
   else if (self == cPicker || self == cText) {
     var L = getLuminosity(self)
-
+    //check for invalid inputs
     if (L == undefined) return throwAlert()
-
+    //create log entry with color swatch
     createVisSwatch(self.value, L)
     createLog(self.value, L)
   }
@@ -135,6 +139,7 @@ function changeColor() {
 
 }
 
+//clear one section
 function clear(els) {
   var results = $$(els),
       resLen = results.length
@@ -143,6 +148,7 @@ function clear(els) {
   }
 }
 
+//calculations and conversions
 var calc = {
   //convert '#hexstr' to [r, g, b]
   'hex2rgb' : function(hex) {
