@@ -63,6 +63,10 @@ h2 {
     h2 {
       font-size: 2.9rem; } }
 
+h3 {
+  font-size: 2rem;
+  font-weight: 600; }
+
 /*icons*/
 .logo {
   display: inline-block;
@@ -148,7 +152,7 @@ section {
   position: relative;
   width: 80vw;
   margin-left: 10vw;
-  margin-top: 10px; }
+  margin-top: 20px; }
 
 section:not(:first-of-type) {
   border-top: 1px solid gray; }
@@ -208,11 +212,12 @@ input[type=text] {
     margin-top: 15px; } }
 
 text {
-  font-size: 0.26rem;
+  /*Safari requires px, not rem*/
+  font-size: 2.6px;
   color: black; }
   @media only screen and (min-width: 1024px) {
     text {
-      font-size: 0.13rem; } }
+      font-size: 1.3px; } }
 
 .list * {
   display: inline-block; }
@@ -221,8 +226,8 @@ text {
   margin: 10px; }
 
 .swatch {
-  width: 20px;
-  height: 20px; }
+  width: 1.5rem;
+  height: 1.5rem; }
 
 .color-list {
   margin-left: 5px; }

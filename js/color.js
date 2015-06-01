@@ -18,9 +18,24 @@ cText.addEventListener('keypress', function(e) {
 })
 //link picker and textbox, set action
 cText.addEventListener('change', changeColor)
-cPicker.addEventListener('change', changeColor)
 bgText.addEventListener('change', changeColor)
-bgPicker.addEventListener('change', changeColor)
+//check if browser supports color input
+if (Modernizr.inputtypes.color) {
+  cPicker.addEventListener('change', changeColor)
+  bgPicker.addEventListener('change', changeColor)
+}
+else {
+  var pickers = [cPicker, bgPicker]
+  pickers.forEach(function(picker) {
+    // //create color swatch
+    // var pSwatch = document.createElement('div')
+    // pSwatch.setAttribute('class', 'swatch')
+    // pSwatch.setAttribute('style', 'background-color:white;border:2px solid gray')
+    // //replace inputs
+    // picker.parentNode.insertBefore(pSwatch, picker)
+    picker.remove()
+  })
+}
 //link clear buttons
 clearSVGbtn.addEventListener('click', clear.bind(this, '.result'))
 clearListBtn.addEventListener('click', clear.bind(this, '.list li'))
@@ -102,7 +117,7 @@ function changeColor() {
     text.setAttribute('dy', '.7')
     text.setAttribute('transform', 'rotate(-90)')
     text.setAttribute('text-anchor', 'end')
-    text.innerHTML = color
+    text.textContent = color
 
     //add to SVG
     g.appendChild(rect)
