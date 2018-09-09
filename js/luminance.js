@@ -9,7 +9,7 @@ module.exports = {
       rgb[i] = parseInt(h, 16)
     })
     return rgb
-  }
+  },
 
   //convert [r,g,b] to hex str
   'rgb2hex': function(rgb) {
@@ -21,7 +21,7 @@ module.exports = {
       result += (zeroHex + hex).substr(-2)
     })
     return result
-  }
+  },
 
   //input color as 3-element array [r, g, b]
   'rgb2xyz': function(color) {

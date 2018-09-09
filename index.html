@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=yes" />
@@ -12,69 +12,70 @@
   <meta property="og:image" content="images/oglogo.png" />
   <link rel="shortcut icon" href="../favicon.ico" type="image/x-icon">
   <link rel="icon" href="../favicon.ico" type="image/x-icon">
-  <title>Color Scale</title>
+  <title>Color Scale - AJ Farkas</title>
   <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,600|Merriweather' rel='stylesheet' type='text/css' />
   <link href="color.css" rel="stylesheet" type="text/css" />
 <body>
-  <!--[if lt IE 9]>
-     
-  <![endif]-->
+  <div class="skip-nav"><a href="#main-content">Skip to Main Content</a></div>
   <nav class="clearfix">
-    <a href="/" title="home"><h1>AJ Farkas</h1><h2>::front-end dev</h2></a>
+    <a href="/" title="home"><p class="title">AJ Farkas<span class="subtitle">::front-end dev</span></p>
     <div class="logos">
-      <a class="logo logo-blog" href="blog" title="blog"></a>
-      <a class="logo logo-contact" href="mailto:farkas.aj@gmail.com" title="email me"></a>
+      <a class="logo logo-github" href="https://github.com/ajfarkas/luminosity-calc" title="github repo" aria-label="view the code on github"></a>
+      <a class="logo logo-contact" href="mailto:farkas.aj@gmail.com" title="email me" aria-label="email me"></a>
     </div>
   </nav>
 
-  <section class="input">
-    <h3>Visual Luminosity Calculator</h3>
-    <p>Choose several colors to see their relative visual brightness</p>
-    <form id="color-input">
-      <fieldset class="primary">
-        <label>
-          <p class="label">Enter your color:</p>
-          <input type="text" name="color-text" id="color-text" placeholder="#2f2f2f"></input>
-          <input type="color" name="color-picker" id="color-picker" value="#2f2f2f"></input>
-        </label>
-      </fieldset>
-      <fieldset class="background">
-        <label>
-          <p class="label">Choose a background color:</p>
-          <input type='text' name="bg-text" id="bg-text" placeholder="rgb(255,255,255)"></input>
-          <input type="color" name="bg-picker" id="bg-picker" value="#ffffff"></input>
-        </label>
-      </fieldset>
-    </form>
-  </section>
+  <main id="main-content" tabindex="-1">
+    <h1>Visual Luminosity Calculator</h1>
+    <section class="input">
+      <h2>Choose Colors:</h2>
+      <p>Choose several colors to see their relative visual brightness</p>
+      <form id="color-input">
+        <fieldset class="primary">
+          <label>
+            <p class="label">Enter your color:</p>
+            <input type="text" name="color-text" id="color-text" placeholder="#2f2f2f"></input>
+            <input type="color" name="color-picker" id="color-picker" value="#2f2f2f"></input>
+          </label>
+        </fieldset>
+        <fieldset class="background">
+          <label>
+            <p class="label">Choose a background color:</p>
+            <input type='text' name="bg-text" id="bg-text" placeholder="rgb(255,255,255)"></input>
+            <input type="color" name="bg-picker" id="bg-picker" value="#ffffff"></input>
+          </label>
+        </fieldset>
+      </form>
+    </section>
 
-  <section class="results">
-    <h3>Results:</h3>
-    <p>on the luminosity scale, 0-100</p>
-    <button type="button" id="clear-svg">clear</button>
-    <svg id="svg-results" width="100%" height="80%" viewBox="0 0 100.4 16.4">
-      <defs>
-        <linearGradient id="monoGrad">
-          <stop offset="0%" stop-color="#000" />
-          <stop offset="13%" stop-color="#040404" />
-          <stop offset="50%" stop-color="#2f2f2f" />
-          <stop offset="76%" stop-color="#808080" />
-          <stop offset="100%" stop-color="#fff" />
-        </linearGradient>
-      </defs>
-      <text x="0" y="1" text-anchor="start">0 Luminosity</text>
-      <text x="100" y="1" text-anchor="end">100 Luminosity</text>
-      <rect x=".1" y="1.6" width="100" height="2.5" id="gradient" fill="url(#monoGrad)" stroke="#2f2f2f" stroke-width=".1"/>
-      <rect x=".1" y="4.1" width="100" height="3.5" id="results-bg" fill="white" stroke="#2f2f2f" stroke-width=".1"/>
-    </svg>
-  </section>
+    <section class="results">
+      <h2>Results:</h2>
+      <p>on the luminosity scale, 0-100</p>
+      <button type="button" id="clear-svg">clear</button>
+      <svg id="svg-results" width="100%" height="80%" viewBox="0 0 100.4 16.4" aria-label="luminosity scale with your selected colors">
+        <defs>
+          <linearGradient id="monoGrad">
+            <stop offset="0%" stop-color="#000" />
+            <stop offset="13%" stop-color="#040404" />
+            <stop offset="50%" stop-color="#2f2f2f" />
+            <stop offset="76%" stop-color="#808080" />
+            <stop offset="100%" stop-color="#fff" />
+          </linearGradient>
+        </defs>
+        <text x="0" y="1" text-anchor="start">0 Luminosity</text>
+        <text x="100" y="1" text-anchor="end">100 Luminosity</text>
+        <rect x=".1" y="1.6" width="100" height="2.5" id="gradient" fill="url(#monoGrad)" stroke="#2f2f2f" stroke-width=".1"/>
+        <rect x=".1" y="4.1" width="100" height="3.5" id="results-bg" fill="white" stroke="#2f2f2f" stroke-width=".1"/>
+      </svg>
+    </section>
 
-  <section class="log clearfix">
-    <h3>Color Log:</h3>
-    <p>hex color and luminosity in L*a*b* color space</p>
-    <button type="button" id="clear-list">clear</button>
-    <ul class="list"></ul>
-  </section>
+    <section class="log clearfix">
+      <h2>Color Log:</h2>
+      <p>hex color and luminosity in L*a*b* color space</p>
+      <button type="button" id="clear-list">clear</button>
+      <ul class="list"></ul>
+    </section>
+  </main>
 </body>
 <script src="js/modernizr.js"></script>
 <script src="js/color.js"></script>
