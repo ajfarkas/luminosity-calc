@@ -45,13 +45,14 @@
             <input type="color" name="bg-picker" id="bg-picker" value="#ffffff"></input>
           </label>
         </fieldset>
+        <!-- <button type="button" class="submit-colors">Add Colors</button> -->
       </form>
     </section>
 
     <section class="results">
       <h2>Results:</h2>
       <p>on the luminosity scale, 0-100</p>
-      <button type="button" id="clear-svg">clear</button>
+      <button type="button" id="clear-results">clear</button>
       <div id="results-display" aria-live="off">
         <p class="result-start">0 Luminosity</p>
         <p class="result-end">100 Luminosity</p>
@@ -59,7 +60,7 @@
       </div>
     </section>
 
-    <section class="log clearfix">
+    <section class="log">
       <h2>Color Log:</h2>
       <p>hex color and luminosity in L*a*b* color space</p>
       <button type="button" id="clear-list">clear</button>

@@ -327,15 +327,8 @@ input[type=text] {
   transform: translateY(-0.3em) rotate(180deg);
 }
 
-text {
-  /*Safari requires px, not rem*/
-  font-size: 2.6px;
-  color: black;
-}
-@media only screen and (min-width: 1024px) {
-  text {
-    font-size: 1.3px;
-  }
+.log {
+  min-height: 200px;
 }
 
 .list * {
@@ -344,6 +337,7 @@ text {
 
 .list li {
   margin: 10px;
+  vertical-align: top;
 }
 
 .swatch {
@@ -353,6 +347,11 @@ text {
 
 .color-list {
   margin-left: 5px;
+}
+
+.color-more {
+  display: block;
+  margin-left: calc(0.9375rem + 10px);
 }
 
 /*# sourceMappingURL=color.css.map */

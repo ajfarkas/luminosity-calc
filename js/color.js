@@ -1,5 +1,5 @@
 import calc from './luminance.js';
-import colorName from './colorNames.js';
+import {colorNames, colorNumbers} from './colorNames.js';
 
 function $(node) {
 	return document.querySelector(node);
@@ -22,10 +22,9 @@ const cPicker = $('#color-picker'),
 			cText = $('#color-text'),
 			bgPicker = $('#bg-picker'),
 			bgText = $('#bg-text'),
-			clearSVGbtn = $('#clear-svg'),
+			clearResultsbtn = $('#clear-results'),
 			clearListBtn = $('#clear-list'),
 			resultsGrad = $('.result-gradient'),
-			svg = $('#svg-results'),
 			list = $('.list');
 
 function createVisSwatch(color, L) {
@@ -48,18 +47,32 @@ function createVisSwatch(color, L) {
 
 function createLog(color, L) {
 	//create nodes
-	const swatch = document.createElement('div');
-	const p = document.createElement('p');
-	const item = document.createElement('li');
+	const swatch = document.createElement('div'),
+				logTitle = document.createElement('p'),
+				logMore = document.createElement('p'),
+				item = document.createElement('li');
 	//create color swatches
-	swatch.setAttribute('class', 'swatch');
-	swatch.setAttribute('style', 'background-color:'+color);
+	swatch.classList.add('swatch');
+	swatch.setAttribute('style', `background-color:${color}`);
 	//create color label
-	p.setAttribute('class', 'color-list');
-	p.innerHTML = color+' : '+Math.floor(L)+'L*';
+	if (color.match(/#[0-9a-fA-F]{3}\b/)) {
+		color = color.replace(/([0-9a-fA-F])/g, '$1$1');
+	}
+	logTitle.classList.add('color-list');
+	logTitle.innerText = `${color} : ${Math.floor(L)}L*`;
+	//create moreInfo
+	logMore.classList.add('color-more');
+	if (colorNames[color]) {
+		logMore.innerText = `hex: ${colorNames[color]}`;
+	} else if (colorNumbers[color]) {
+		logMore.innerText = `name: ${colorNumbers[color]}`;
+	}
 	//add li with swatch and label
 	item.appendChild(swatch);
-	item.appendChild(p);
+	item.appendChild(logTitle);
+	if (logMore.innerText.length) {
+		item.appendChild(logMore);
+	}
 	list.appendChild(item);
 }
 
@@ -87,18 +100,18 @@ function getLuminosity(node) {
 	if ( value.match(/#[0-9a-fA-F]{3}\b/) ) {
 		// convert 3-byte hex to 6-byte
 		value = '#' + value.replace('#', '').split('').map(h => h+h).join('');
-	} else if (colorName[value]) {
+	} else if (colorNames[value]) {
 		// convert color name to hex
-		value = colorName[value];
+		value = colorNames[value];
 	}
 
 	//convert to [r,g,b] format
-	if ( value.match(/#[0-9a-fA-F]{6}/) ) {
+	if ( value.match(/#[0-9a-fA-F]{6}\b/) ) {
 		//for hex colors
 		rgb = calc.hex2rgb(value);
 	} else if ( value.match(/rgba?\(\d{1,3}\,\s?\d{1,3}\,\s?\d{1,3}/) ) {
 		//for rgb colors
-		const color = node.value.match(/rgba?\((\d{1,3})\,\s?(\d{1,3})\,\s?(\d{1,3})/);
+		const color = value.match(/rgba?\((\d{1,3})\,\s?(\d{1,3})\,\s?(\d{1,3})/);
 		rgb = [+color[1], +color[2], +color[3]];
 		node.value = calc.rgb2hex(rgb);
 	}
@@ -112,32 +125,32 @@ function getLuminosity(node) {
 	return null;
 } 
 
-function changeColor(e) {
+function changeBGColor(e) {
 	const el = e.currentTarget;
 
-	if (el === bgPicker || el === bgText) {
-		if (getLuminosity(el) === null ) {
-			return throwAlert(el);
-		}
-		const styleEl = $('#style-updates');
-		styleEl.innerText = styleEl.innerText.replace(
-			/(--contrast-bg:)([#0-9a-zA-Z]*)(;)/,
-			`$1${el.value}$3`
-		);
-		$('#results-bg').setAttribute('fill', el.value);
-	} else if (el === cPicker || el === cText) {
-		//find luminosity & place color swatches
-		const L = getLuminosity(el);
-		//check for invalid inputs
-		if (L === null) {
-			return throwAlert(el);
-		}
-		//create log entry with color swatch
-		createVisSwatch(el.value, L);
-		createLog(el.value, L);
+	if (getLuminosity(el) === null ) {
+		return throwAlert(el);
 	}
+	const styleEl = $('#style-updates');
+	styleEl.innerText = styleEl.innerText.replace(
+		/(--contrast-bg:)([#0-9a-zA-Z]*)(;)/,
+		`$1${el.value}$3`
+	);
+}
 
-	
+
+function addColor(e) {
+	const el = e.currentTarget;
+
+	//find luminosity & place color swatches
+	const L = getLuminosity(el);
+	//check for invalid inputs
+	if (L === null) {
+		return throwAlert(el);
+	}
+	//create log entry with color swatch
+	createVisSwatch(el.value, L);
+	createLog(el.value, L);
 }
 
 //clear one section
@@ -149,22 +162,21 @@ function clear(els) {
 	}
 }
 
-function changeColorByKeyPress (e) {
+function addColorByKeyPress (e) {
 	if (e.keyCode === 13 || e.keyCode === 9) {
 		e.preventDefault();
-		changeColor(e);
+		addColor(e);
 	}
 }
 
-//prevent page reload
-cText.addEventListener('keypress', changeColorByKeyPress);
 //link picker and textbox, set action
-cText.addEventListener('change', changeColor);
-bgText.addEventListener('change', changeColor);
+cText.addEventListener('change', addColor);
+bgText.addEventListener('change', changeBGColor);
+// $('.submit-colors').addEventListener('click', changeColor);
 //check if browser supports color input
 if (Modernizr.inputtypes.color) {
-	cPicker.addEventListener('keypress', changeColorByKeyPress);
-	bgPicker.addEventListener('change', changeColor);
+	cPicker.addEventListener('keypress', addColorByKeyPress);
+	bgPicker.addEventListener('change', changeBGColor);
 } else {
 	const pickers = [cPicker, bgPicker];
 	pickers.forEach((picker) => {
@@ -172,5 +184,5 @@ if (Modernizr.inputtypes.color) {
 	});
 }
 //link clear buttons
-clearSVGbtn.addEventListener('click', clear.bind(this, '.result'));
+clearResultsbtn.addEventListener('click', clear.bind(this, '.result'));
 clearListBtn.addEventListener('click', clear.bind(this, '.list li'));
