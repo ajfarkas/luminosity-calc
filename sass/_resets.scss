@@ -17,12 +17,6 @@ body{
   }
 }
 
-.clearfix:after {
-  content: " ";
-  display: table;
-  clear: both;  
-}
-
 a {
   text-decoration: none;
   color: inherit;
@@ -36,6 +30,22 @@ a {
 
 li {
   list-style-type: none;
+}
+
+.skip-nav {
+  position: absolute;
+  display: block;
+  top: -100vh;
+  margin: 4px;
+  padding: 4px;
+  text-align: center;
+  font-size: 1.5rem;
+  color: $color2;
+
+  &:focus {
+    position: static;
+    outline: 3px solid $color2;
+  }
 }
 
 .noDisplay {

@@ -22,12 +22,6 @@ body {
   }
 }
 
-.clearfix:after {
-  content: " ";
-  display: table;
-  clear: both;
-}
-
 a {
   text-decoration: none;
   color: inherit;
@@ -41,45 +35,66 @@ li {
   list-style-type: none;
 }
 
+.skip-nav {
+  position: absolute;
+  display: block;
+  top: -100vh;
+  margin: 4px;
+  padding: 4px;
+  text-align: center;
+  font-size: 1.5rem;
+  color: #008299;
+}
+.skip-nav:focus {
+  position: static;
+  outline: 3px solid #008299;
+}
+
 .noDisplay {
   display: none;
 }
 
 /*fonts*/
-h1, h2 {
+h1, h2,
+.title, .subtitle {
   display: inline-block;
   font-family: "Merriweather", Georgia, serif;
   font-weight: 400;
 }
 
-h1 {
+h1, .title {
   font-size: 2.2rem;
   line-height: 2;
 }
 @media screen and (min-width: 720px) and (max-width: 959px) {
-  h1 {
+  h1, .title {
     font-size: 2.8rem;
     line-height: 1.6;
   }
 }
 @media only screen and (min-width: 960px) {
-  h1 {
+  h1, .title {
     font-size: 3.5rem;
     line-height: 1.3;
   }
 }
 
-h2 {
-  color: #00c0e2;
+h1 {
+  margin-left: 30px;
+  margin-top: 20px;
+}
+
+h2, .subtitle {
+  color: #008299;
   font-size: 1.9rem;
 }
 @media screen and (min-width: 720px) and (max-width: 959px) {
-  h2 {
+  h2, .subtitle {
     font-size: 2.2rem;
   }
 }
 @media only screen and (min-width: 960px) {
-  h2 {
+  h2, .subtitle {
     font-size: 2.9rem;
   }
 }
@@ -95,21 +110,17 @@ h3 {
   width: 2.8rem;
   height: 2.8rem;
   vertical-align: middle;
-  background-image: url("images/logos.png");
-  background-size: 11.2rem 5.6rem;
 }
 @media screen and (min-width: 720px) and (max-width: 959px) {
   .logo {
     width: 3rem;
     height: 3rem;
-    background-size: 12rem 6rem;
   }
 }
 @media only screen and (min-width: 960px) {
   .logo {
     width: 3.2rem;
     height: 3.2rem;
-    background-size: 12.8rem 6.4rem;
   }
 }
 
@@ -124,62 +135,6 @@ a.logo {
 @media only screen and (min-width: 960px) {
   a.logo {
     margin-left: 1.0666666667rem;
-  }
-}
-
-.logo-blog {
-  background-position: -5.6rem 0;
-}
-@media screen and (min-width: 720px) and (max-width: 959px) {
-  .logo-blog {
-    background-position: -6rem 0;
-  }
-}
-@media only screen and (min-width: 960px) {
-  .logo-blog {
-    background-position: -6.4rem 0;
-  }
-}
-
-.logo-blog:hover, a:hover .logo-blog {
-  background-position: -5.6rem -2.8rem;
-}
-@media screen and (min-width: 720px) and (max-width: 959px) {
-  .logo-blog:hover, a:hover .logo-blog {
-    background-position: -6rem -3rem;
-  }
-}
-@media only screen and (min-width: 960px) {
-  .logo-blog:hover, a:hover .logo-blog {
-    background-position: -6.4rem -3.2rem;
-  }
-}
-
-.logo-contact {
-  background-position: -8.4rem 0;
-}
-@media screen and (min-width: 720px) and (max-width: 959px) {
-  .logo-contact {
-    background-position: -9rem 0;
-  }
-}
-@media only screen and (min-width: 960px) {
-  .logo-contact {
-    background-position: -9.6rem 0;
-  }
-}
-
-.logo-contact:hover, a:hover .logo-contact {
-  background-position: -8.4rem -2.8rem;
-}
-@media screen and (min-width: 720px) and (max-width: 959px) {
-  .logo-contact:hover, a:hover .logo-contact {
-    background-position: -9rem -3rem;
-  }
-}
-@media only screen and (min-width: 960px) {
-  .logo-contact:hover, a:hover .logo-contact {
-    background-position: -9.6rem -3.2rem;
   }
 }
 
@@ -204,6 +159,10 @@ nav {
 }
 
 /*body*/
+#main-content:focus {
+  outline: none;
+}
+
 section {
   position: relative;
   width: 80vw;
@@ -233,7 +192,7 @@ button:active {
 
 button:focus {
   outline: none;
-  color: #00c0e2;
+  color: #008299;
 }
 
 form {
@@ -353,6 +312,28 @@ input[type=text] {
 .color-more {
   display: block;
   margin-left: calc(0.9375rem + 10px);
+}
+
+#github path {
+  fill: #181616;
+}
+
+a:hover #github path {
+  fill: #008299;
+}
+
+#envelope circle {
+  fill: #181616;
+}
+#envelope path {
+  stroke: #fff;
+  stroke-width: 6;
+  stroke-linejoin: round;
+  fill: none;
+}
+
+a:hover #envelope circle {
+  fill: #008299;
 }
 
 /*# sourceMappingURL=color.css.map */
