@@ -3,180 +3,224 @@
 @import "resets";
 
 /*fonts*/
-  h1, h2 {
-    display: inline-block;
-    font-family: $font-headline;
-    font-weight: 400
+h1, h2 {
+  display: inline-block;
+  font-family: $font-headline;
+  font-weight: 400
+}
+h1 {
+  font-size: rem(22);
+  line-height: 2.0;
+  @include breakpoint(720 959) {
+    font-size: rem(28);
+    line-height: 1.6;
   }
-  h1 {
-    font-size: rem(22);
-    line-height: 2.0;
-    @include breakpoint(720 959) {
-      font-size: rem(28);
-      line-height: 1.6;
-    }
-    @include breakpoint(960) {
-      font-size: rem(35);
-      line-height: 1.3;
-    }
+  @include breakpoint(960) {
+    font-size: rem(35);
+    line-height: 1.3;
   }
-  h2 {
-    color: $color2;
-    font-size: rem(19);
-    @include breakpoint(720 959) { font-size: rem(22); }
-    @include breakpoint(960) { font-size: rem(29); }
+}
+h2 {
+  color: $color2;
+  font-size: rem(19);
+  @include breakpoint(720 959) { font-size: rem(22); }
+  @include breakpoint(960) { font-size: rem(29); }
+}
+h3 {
+  font:{
+    size: rem(20);
+    weight: 600;
   }
-  h3 {
-    font:{
-      size: rem(20);
-      weight: 600;
-    }
-  }
+}
 
 /*icons*/
-  .logo {
-    display: inline-block;
-    width: $logo-sm;
-    height: $logo-sm;
-    vertical-align: middle;
-    background: {
-      image: url('images/logos.png');
-      size: $logo-sm*4 $logo-sm*2;
-    }
-    @include breakpoint(720 959) {
-      width: $logo-med;
-      height: $logo-med;
-      background-size: $logo-med*4 $logo-med*2;
-    }
-    @include breakpoint(960) {
-      width: $logo-lg;
-      height: $logo-lg;
-      background-size: $logo-lg*4 $logo-lg*2;
-    }
+.logo {
+  display: inline-block;
+  width: $logo-sm;
+  height: $logo-sm;
+  vertical-align: middle;
+  background: {
+    image: url('images/logos.png');
+    size: $logo-sm*4 $logo-sm*2;
   }
+  @include breakpoint(720 959) {
+    width: $logo-med;
+    height: $logo-med;
+    background-size: $logo-med*4 $logo-med*2;
+  }
+  @include breakpoint(960) {
+    width: $logo-lg;
+    height: $logo-lg;
+    background-size: $logo-lg*4 $logo-lg*2;
+  }
+}
 
-  a.logo {
-    margin-left: $logo-sm/6;
-    @include breakpoint(720 959) { margin-left: $logo-med/5; }
-    @include breakpoint(960) { margin-left: $logo-lg/3; }
-  }
+a.logo {
+  margin-left: $logo-sm/6;
+  @include breakpoint(720 959) { margin-left: $logo-med/5; }
+  @include breakpoint(960) { margin-left: $logo-lg/3; }
+}
 
-  .logo-blog {
-    background-position: (-2 * $logo-sm) 0;
-    @include breakpoint(720 959) { background-position: (-2 * $logo-med) 0; }
-    @include breakpoint(960) { background-position: (-2 * $logo-lg) 0; }
-  }
-  .logo-blog:hover, a:hover .logo-blog {
-    background-position: (-2 * $logo-sm) (-$logo-sm);
-    @include breakpoint(720 959) { background-position: (-2 * $logo-med) (-$logo-med); }
-    @include breakpoint(960) {  background-position: (-2 * $logo-lg) (-$logo-lg); }
-  }
+.logo-blog {
+  background-position: (-2 * $logo-sm) 0;
+  @include breakpoint(720 959) { background-position: (-2 * $logo-med) 0; }
+  @include breakpoint(960) { background-position: (-2 * $logo-lg) 0; }
+}
+.logo-blog:hover, a:hover .logo-blog {
+  background-position: (-2 * $logo-sm) (-$logo-sm);
+  @include breakpoint(720 959) { background-position: (-2 * $logo-med) (-$logo-med); }
+  @include breakpoint(960) {  background-position: (-2 * $logo-lg) (-$logo-lg); }
+}
 
-  .logo-contact {
-    background-position: (-3 * $logo-sm) 0;
-    @include breakpoint(720 959) { background-position: (-3 * $logo-med) 0; }
-    @include breakpoint(960) { background-position: (-3 * $logo-lg) 0; }
-  }
-  .logo-contact:hover, a:hover .logo-contact {
-    background-position: (-3 * $logo-sm) (-$logo-sm);
-    @include breakpoint(720 959) { background-position: (-3 * $logo-med) (-$logo-med); }
-    @include breakpoint(960) {  background-position: (-3 * $logo-lg) (-$logo-lg); }
-  }
+.logo-contact {
+  background-position: (-3 * $logo-sm) 0;
+  @include breakpoint(720 959) { background-position: (-3 * $logo-med) 0; }
+  @include breakpoint(960) { background-position: (-3 * $logo-lg) 0; }
+}
+.logo-contact:hover, a:hover .logo-contact {
+  background-position: (-3 * $logo-sm) (-$logo-sm);
+  @include breakpoint(720 959) { background-position: (-3 * $logo-med) (-$logo-med); }
+  @include breakpoint(960) {  background-position: (-3 * $logo-lg) (-$logo-lg); }
+}
 
 /*nav*/
-  nav {
-    box-sizing: border-box;
-    width: 100%;
-    padding: rem(8) rem(32);
-    background-color: $bg-nav;
-    border-bottom: 1px solid lightgray;
-    @include breakpoint(399, max) { padding: rem(8); }
-  }
+nav {
+  box-sizing: border-box;
+  width: 100%;
+  padding: rem(8) rem(32);
+  background-color: $bg-nav;
+  border-bottom: 1px solid lightgray;
+  @include breakpoint(399, max) { padding: rem(8); }
+}
 
-  .logos {
-    float: right;
-    padding-top: rem(6);
-    height: rem(38);
-  }
+.logos {
+  float: right;
+  padding-top: rem(6);
+  height: rem(38);
+}
 
 /*body*/
-  section { 
-    position: relative;
-    width: 80vw;
-    margin-left: 10vw;
-    margin-top: 20px;
-  }
-  section:not(:first-of-type) { border-top: 1px solid gray; }  
+section { 
+  position: relative;
+  width: 80vw;
+  margin-left: 10vw;
+  margin-top: 20px;
+}
+section:not(:first-of-type) { border-top: 1px solid gray; }  
 
-  button {
-    position: absolute;
-    top: 3px;
-    right: 0;
-    padding: 5px 8px;
-    border-radius: 4px;
-    border: 1px solid #ccc;
-    box-shadow: 0 -1px #666 inset;
-    background-color: white;
-    text-transform: uppercase;
-  }
-  button:active { box-shadow: 0 1px #666 inset; }
-  button:focus { 
-    outline: none;
-    color: $color2; 
-  }
+button {
+  position: absolute;
+  top: 3px;
+  right: 0;
+  padding: 5px 8px;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+  box-shadow: 0 -1px #666 inset;
+  background-color: white;
+  text-transform: uppercase;
+}
+button:active { box-shadow: 0 1px #666 inset; }
+button:focus { 
+  outline: none;
+  color: $color2; 
+}
 
-  form { margin: 25px 20px; }
+form { margin: 25px 20px; }
 
-  .primary { margin-bottom: 15px; }
+.primary { margin-bottom: 15px; }
 
-  .label { font-weight: 600; }
+.label { font-weight: 600; }
 
-  input[type=color] {
-    border: 0;
-    width: 25px;
-    height: 20px;
-  }
+input[type=color] {
+  border: 0;
+  width: 25px;
+  height: 20px;
+}
 
-  input[type=text] {
-    border: 0;
-    width: 150px;
-    height: 20px;
-    box-shadow: 0px -2px #fff inset, 0 -3px #000 inset;
-  }
+input[type=text] {
+  border: 0;
+  width: 150px;
+  height: 20px;
+  box-shadow: 0px -2px #fff inset, 0 -3px #000 inset;
+}
 
-  .input-alert {
-    display: inline-block;
-    padding: 0 4px;
-    color: white;
-    background-color: crimson;
-  }
-  
-  .results {
-    height: 32vw;
-    @include breakpoint(1024) { height: 16vw; }
-  }
+.input-alert {
+  display: inline-block;
+  padding: 0 4px;
+  color: white;
+  background-color: crimson;
+}
 
-  #svg-results {
-    @include breakpoint(1024) { margin-top: 15px; }
-  }
+.results {
+  min-height: 250px;
+  height: 32vw;
+  @include breakpoint(1024) { height: 16vw; }
+}
 
-  text { /*Safari requires px, not rem*/
-    font-size: 2.6px;
-    color: black;
-    @include breakpoint(1024) { 
-      font-size: 1.3px;
-    }
-  }
+#results-display {
+  width: 98%;
+  margin-left: 1%;
+  @include breakpoint(1024) { margin-top: 15px; }
+}
+.result-start {
+  display: inline-block;
+}
+.result-end {
+  display: inline-block;
+  float: right;
+}
+.result-gradient {
+  position: relative;
+  height: rem(20);
+  border: 1px solid black;
+  background-image: linear-gradient(to right,
+    #000000 0%,
+    #040404 13%,
+    #2f2f2f 50%,
+    #808080 76%,
+    #ffffff 100%);
+  box-shadow: 0 21px 0 -1px var(--contrast-bg),
+              0 40px 0 -1px var(--contrast-bg),
+              0 21px 0  0px black,
+              0 40px 0  0px black;
+}
+.result {
+  position: absolute;
+  top: 50%;
+  height: 5px;
+  min-width: 185px;
+  transform-origin: 0 0;
+  transform: rotate(90deg) translateY(-50%);
+}
+.result-swatch {
+  display: inline-block;
+  width: 50px;
+  height: 5px;
+  vertical-align: top;
+}
+.result-label {
+  display: inline-block;
+  margin-left: 5px;
+  transform: translateY(-0.3em) rotate(180deg);
+}
 
-  .list * { display: inline-block; }
-  .list li { margin: 10px; }
-  .swatch {
-    width: rem(15);
-    height: rem(15);
+text { /*Safari requires px, not rem*/
+  font-size: 2.6px;
+  color: black;
+  @include breakpoint(1024) { 
+    font-size: 1.3px;
   }
-  .color-list {
-    margin-left: 5px;
-  }
+}
+
+.list * { display: inline-block; }
+.list li { margin: 10px; }
+.swatch {
+  width: rem(15);
+  height: rem(15);
+}
+.color-list {
+  margin-left: 5px;
+}
 
 
 
