@@ -191,7 +191,6 @@ button:active {
 }
 
 button:focus {
-  outline: none;
   color: #008299;
 }
 
